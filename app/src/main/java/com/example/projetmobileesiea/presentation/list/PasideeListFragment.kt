@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,8 +64,10 @@ class PasideeListFragment : Fragment() {
 
         })
         }
-        private fun onClickedPokeItem(item: item) {
-            findNavController().navigate(R.id.navigateToPokeItemDetailFragment)
+        private fun onClickedPokeItem(id: Int) {
+            findNavController().navigate(R.id.navigateToPokeItemDetailFragment, bundleOf(
+                    "itemId" to (id +1)
+            ))
      }
 
 

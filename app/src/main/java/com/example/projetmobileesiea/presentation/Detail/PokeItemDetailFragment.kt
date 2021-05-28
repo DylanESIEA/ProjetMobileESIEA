@@ -23,6 +23,7 @@ class PokeItemDetailFragment : Fragment() {
 
     private lateinit var textViewName : TextView
 
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -43,7 +44,8 @@ class PokeItemDetailFragment : Fragment() {
     }
 
     private fun callApi(){
-        Singletons.pokeItemApi.getPokeItemDetail("1").enqueue(object : retrofit2.Callback<PokeItemDetailResponse> {
+        val id : Int  = arguments?.getInt("itemId") ?: -1
+        Singletons.pokeItemApi.getPokeItemDetail(id).enqueue(object : retrofit2.Callback<PokeItemDetailResponse> {
             override fun onFailure(
                     call: Call<PokeItemDetailResponse>,
                     t: Throwable

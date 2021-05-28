@@ -9,6 +9,6 @@ interface PokeItemApi {
     fun getDigimonList() : Call<PokeItemListResponse>
 
     @GET("item/{id}")
-    fun getPokeItemDetail(@Path("id") id: String) : Call<PokeItemDetailResponse>
+    fun getPokeItemDetail(@Path("id") id: Int) : Call<PokeItemDetailResponse>
 
 }

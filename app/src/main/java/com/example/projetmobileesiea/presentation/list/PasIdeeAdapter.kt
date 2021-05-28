@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetmobileesiea.R
 
-class PasIdeeAdapter(private var dataSet: List<item>, var listener: ((item) -> Unit)? = null) :
+class PasIdeeAdapter(private var dataSet: List<item>, var listener: ((Int) -> Unit)? = null) :
     RecyclerView.Adapter<PasIdeeAdapter.ViewHolder>() {
 
 
@@ -48,7 +48,7 @@ class PasIdeeAdapter(private var dataSet: List<item>, var listener: ((item) -> U
         val item : item = dataSet[position]
         viewHolder.textView.text = item.name
         viewHolder.itemView.setOnClickListener {
-            listener?.invoke(item)
+            listener?.invoke(position)
         }
 
     }
