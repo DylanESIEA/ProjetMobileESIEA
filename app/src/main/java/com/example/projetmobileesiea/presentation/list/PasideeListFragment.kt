@@ -11,13 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetmobileesiea.R
 import com.example.projetmobileesiea.presentation.Singletons
-import com.example.projetmobileesiea.presentation.api.PokeItemApi
 import com.example.projetmobileesiea.presentation.api.PokeItemListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -50,21 +47,46 @@ class PasideeListFragment : Fragment() {
             adapter = this@PasideeListFragment.adapter
         }
 
-        Singletons.pokeItemApi.getDigimonList().enqueue(object : Callback<PokeItemListResponse>{
+        val list = getListFromCache()
+        if(list.isEmpty()){
+            callApi()
+        } else {
+            showList(list)
+        }
+
+        }
+
+        private fun getListFromCache(): List<item> {
+            TODO()
+        }
+    private fun saveListIntoCache() {
+        TODO("Not yet implemented")
+    }
+         private fun callApi() {
+        Singletons.pokeItemApi.getDigimonList().enqueue(object : Callback<PokeItemListResponse> {
             override fun onFailure(call: Call<PokeItemListResponse>, t: Throwable) {
                 //TODO("Not yet implemented")
             }
 
             override fun onResponse(call: Call<PokeItemListResponse>, response: Response<PokeItemListResponse>) {
-                if(response.isSuccessful && response.body() != null){
-                   val digimonResponse = response.body()!!
-                    adapter.updateList(digimonResponse.results)
+                if (response.isSuccessful && response.body() != null) {
+                    val digimonResponse = response.body()!!
+                    saveListIntoCache()
+                    showList(digimonResponse.results)
                 }
             }
 
         })
-        }
-        private fun onClickedPokeItem(id: Int) {
+    }
+
+
+
+    private fun showList(pokeitemList : List<item>) {
+        adapter.updateList(pokeitemList)
+
+    }
+
+    private fun onClickedPokeItem(id: Int) {
             findNavController().navigate(R.id.navigateToPokeItemDetailFragment, bundleOf(
                     "itemId" to (id +1)
             ))
