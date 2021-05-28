@@ -25,9 +25,6 @@ class PasideeListFragment : Fragment() {
     private lateinit var recyclerView : RecyclerView
     private val adapter = PasIdeeAdapter(listOf(), :: onClickedPokeItem)
 
-
-    private val layoutManager = LinearLayoutManager(context)
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -43,26 +40,10 @@ class PasideeListFragment : Fragment() {
 
 
         recyclerView.apply {
-            layoutManager = this@PasideeListFragment.layoutManager
+            layoutManager = LinearLayoutManager(context)
             adapter = this@PasideeListFragment.adapter
         }
 
-        val list = getListFromCache()
-        if(list.isEmpty()){
-            callApi()
-        } else {
-            showList(list)
-        }
-
-        }
-
-        private fun getListFromCache(): List<item> {
-            TODO()
-        }
-    private fun saveListIntoCache() {
-        TODO("Not yet implemented")
-    }
-         private fun callApi() {
         Singletons.pokeItemApi.getDigimonList().enqueue(object : Callback<PokeItemListResponse> {
             override fun onFailure(call: Call<PokeItemListResponse>, t: Throwable) {
                 //TODO("Not yet implemented")
@@ -71,21 +52,12 @@ class PasideeListFragment : Fragment() {
             override fun onResponse(call: Call<PokeItemListResponse>, response: Response<PokeItemListResponse>) {
                 if (response.isSuccessful && response.body() != null) {
                     val digimonResponse = response.body()!!
-                    saveListIntoCache()
-                    showList(digimonResponse.results)
+                    adapter.updateList(digimonResponse.results)
                 }
             }
 
         })
     }
-
-
-
-    private fun showList(pokeitemList : List<item>) {
-        adapter.updateList(pokeitemList)
-
-    }
-
     private fun onClickedPokeItem(id: Int) {
             findNavController().navigate(R.id.navigateToPokeItemDetailFragment, bundleOf(
                     "itemId" to (id +1)
