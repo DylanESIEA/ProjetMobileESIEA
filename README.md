@@ -1,9 +1,10 @@
 # ProjetMobileESIEA
 
 Bonjour,
+
 Voici le projet mobile à réaliser pour le 30mai 2021.
 
-L'application est fait pour afficher les pokeballs ainsi que les informations sur ces dernières.
+L'application est faite pour afficher les pokeballs ainsi que les informations sur ces dernières.
 
 Dans cette application, vous trouverez :
  - un ecran avec une liste d'élements
