@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetmobileesiea.R
 
-class PasIdeeAdapter(private var dataSet: List<Pasidee>) :
+class PasIdeeAdapter(private var dataSet: List<item>, var listener: ((item) -> Unit)? = null) :
     RecyclerView.Adapter<PasIdeeAdapter.ViewHolder>() {
+
 
     /**
      *
@@ -24,7 +25,7 @@ class PasIdeeAdapter(private var dataSet: List<Pasidee>) :
         }
     }
 
-    fun updateList(list: List<Pasidee>){
+    fun updateList(list: List<item>){
         dataSet = list
         notifyDataSetChanged()
     }
@@ -44,8 +45,11 @@ class PasIdeeAdapter(private var dataSet: List<Pasidee>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val aucuneidee : Pasidee = dataSet[position]
-        viewHolder.textView.text = aucuneidee.name
+        val item : item = dataSet[position]
+        viewHolder.textView.text = item.name
+        viewHolder.itemView.setOnClickListener {
+            listener?.invoke(item)
+        }
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.projetmobileesiea.presentation.list
 
-data class Pasidee (
+data class item (
     val name : String
+
 )
