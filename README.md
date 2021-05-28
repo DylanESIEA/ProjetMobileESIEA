@@ -12,6 +12,13 @@ Dans cette application, vous trouverez :
  - Appel a un web service API Rest (https://pokeapi.co/api/v2/item)
  - le stockage de données en cache
  - un singleton 
+
+###screen###
+
+
+ ![applimobile](https://user-images.githubusercontent.com/75210503/120020843-9223bc00-bfea-11eb-9ea2-647556a6f329.PNG)
+
+ 
  
  Bonne journée à vous,
  
