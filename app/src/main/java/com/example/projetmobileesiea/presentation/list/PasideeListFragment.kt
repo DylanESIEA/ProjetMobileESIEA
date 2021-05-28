@@ -9,8 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetmobileesiea.R
+import com.example.projetmobileesiea.presentation.Singletons
 import com.example.projetmobileesiea.presentation.api.PokeItemApi
-import com.example.projetmobileesiea.presentation.api.PokeItemResponse
+import com.example.projetmobileesiea.presentation.api.PokeItemListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,20 +49,12 @@ class PasideeListFragment : Fragment() {
             adapter = this@PasideeListFragment.adapter
         }
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val pokeItemApi : PokeItemApi = retrofit.create(PokeItemApi::class.java)
-
-
-        pokeItemApi.getDigimonList().enqueue(object : Callback<PokeItemResponse>{
-            override fun onFailure(call: Call<PokeItemResponse>, t: Throwable) {
+        Singletons.pokeItemApi.getDigimonList().enqueue(object : Callback<PokeItemListResponse>{
+            override fun onFailure(call: Call<PokeItemListResponse>, t: Throwable) {
                 //TODO("Not yet implemented")
             }
 
-            override fun onResponse(call: Call<PokeItemResponse>, response: Response<PokeItemResponse>) {
+            override fun onResponse(call: Call<PokeItemListResponse>, response: Response<PokeItemListResponse>) {
                 if(response.isSuccessful && response.body() != null){
                    val digimonResponse = response.body()!!
                     adapter.updateList(digimonResponse.results)
@@ -69,10 +62,6 @@ class PasideeListFragment : Fragment() {
             }
 
         })
-
-
-
-
         }
         private fun onClickedPokeItem(item: item) {
             findNavController().navigate(R.id.navigateToPokeItemDetailFragment)

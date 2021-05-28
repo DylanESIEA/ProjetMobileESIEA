@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/PokeItemDetailFragment"
-        android:name="com.example.projetmobileesiea.SecondFragment"
+        android:name="com.example.projetmobileesiea.presentation.Detail.PokeItemDetailFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_pokeitem_detail">
 
         <action
             android:id="@+id/navigateToPokeItemListFragment"
